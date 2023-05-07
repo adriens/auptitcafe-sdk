@@ -16,6 +16,10 @@ len(menus)
 ## Build
 
 ```
+poetry show --tree
+```
+
+```
 poetry build
 poetry install
 ```
@@ -25,6 +29,8 @@ poetry install
 ```
 poetry run pytest
 ```
+
+
 
 ## Publish
 
