@@ -50,7 +50,7 @@ class Menus:
         return out
     
     def get_all_as_df(self):
-        df = pd.DataFrame.from_records([plat.to_dict(self) for plat in Menus.get_all(self)])
+        df = pd.DataFrame.from_records([plat.to_dict() for plat in Menus.get_all(self)])
         df
         return df
     
