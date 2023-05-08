@@ -1,8 +1,10 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 from auptitcafe.plat import Plat
+
 
 class Menus:
     def __init__(self):
@@ -46,4 +48,9 @@ class Menus:
             print("================================================================")
             out.append(plat)
         return out
+    
+    def get_all_as_df(self):
+        df = pd.DataFrame.from_records([plat.to_dict() for plat in Menus.get_all(self)])
+        df
+        return df
     
