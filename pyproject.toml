@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "auptitcafe"
-version = "0.1.3"
+version = "0.1.4"
 description = "SDK pour interagir avec http://auptitcafe.nc/menu/"
 authors = ["Adrien SALES <Adrien.Sales@gmail.com>"]
 readme = "README.md"
