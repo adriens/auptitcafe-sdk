@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "auptitcafe"
-version = "0.1.5"
+version = "0.1.6"
 description = "SDK pour interagir avec http://auptitcafe.nc/menu/"
 authors = ["Adrien SALES <Adrien.Sales@gmail.com>"]
 readme = "README.md"
@@ -9,9 +9,6 @@ packages = [{include = "auptitcafe"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 beautifulsoup4 = "^4.12.2"
-requests = "^2.28.2, !=2.30.0"
-pandas = "^2.0.1"
-
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.1"

@@ -49,8 +49,14 @@ class Menus:
             out.append(plat)
         return out
     
-    def get_all_as_df(self):
-        df = pd.DataFrame.from_records([plat.to_dict() for plat in Menus.get_all(self)])
-        df
-        return df
+    def to_csv(self, csv_filename='menus.csv', header=True):
+        menu_instance = Menus()
+        plats = []
+        plats = menu_instance.get_all()
+        # Menus
+        with open(csv_filename, 'w') as file:
+            if header:
+                file.write('titre_plat,prix,category,recette,image_url\n')
+            for plat in plats:
+                file.write('"' + plat.title + '","' + str(plat.price) + '","' + plat.cat + '","' + plat.details + '","' + plat.img_url +  '"\n')
     
