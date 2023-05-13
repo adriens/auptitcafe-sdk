@@ -7,7 +7,7 @@ class Plat:
         self.img_url = img_url
     
     def __str__(self):
-        return f"Title='{self.name}"
+        return f"Title='{self.title}"
     
     def to_dict(self):
         return {
