@@ -4,6 +4,12 @@
 ![PyPI - Format](https://img.shields.io/pypi/format/auptitcafe)
 ![PyPI](https://img.shields.io/pypi/v/auptitcafe)
 
+# 🔖 Resources
+
+- http://auptitcafe.nc/
+- [Au P'tit Cafe on TripAdvisor](https://www.tripadvisor.com/Restaurant_Review-g294130-d1952994-Reviews-Au_P_tit_Cafe-Noumea_Grand_Terre.html)
+- [`auptitcafe`](https://pypi.org/project/auptitcafe/) on `pypi`
+
 # 🚀 Quickstart
 
 For the impatients, here is a quick and ready to use code snippet:
