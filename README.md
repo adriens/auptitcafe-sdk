@@ -4,17 +4,29 @@
 ![PyPI - Format](https://img.shields.io/pypi/format/auptitcafe)
 ![PyPI](https://img.shields.io/pypi/v/auptitcafe)
 
-# Quickstart
+# 🚀 Quickstart
+
+For the impatients, here is a quick and ready to use code snippet:
 
 ```python
+# Install the package
 !pip install auptitcafe
 
+# Make some imports
 from auptitcafe.menus import Menus
+import pandas as pd
 
+# Create the main utility instance
 menu_instance = Menus()
-menus = []
-menus = menu_instance.get_all()
-len(menus)
+
+# Dump menus as a csv file
+menus = 'menus.csv'
+menu_instance.to_csv(menus)
+
+# Load menus in a panda dataframe
+df = pd.read_csv(menus)
+# Diplay dataframe
+df
 ```
 
 # For devs
