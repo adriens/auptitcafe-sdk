@@ -11,6 +11,14 @@ class Menus:
         self.menus_url = "http://auptitcafe.nc/menu/"
 
 
+    def get_title(self):
+        response = requests.get(self.menus_url )
+        soup = BeautifulSoup(response.text, 'html.parser')
+        title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
+        out = title.text.strip()
+        return out
+
+
     def get_all(self):
         out = []
         response = requests.get(self.menus_url )

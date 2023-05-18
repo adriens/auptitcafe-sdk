@@ -12,5 +12,9 @@ def test_menus():
     # test csv export
     test_filename = '/tmp/test_menus.csv'
     menu_instance.to_csv(test_filename)
+
+    # Test the about
+    title = menu_instance.get_title()
+    assert len(title) > 0
     
 

@@ -39,3 +39,6 @@ pip-wheel-metadata
 /poetry.toml
 
 poetry/core/*
+auptitcafe/__pycache__/plat.cpython-311.pyc
+auptitcafe/__pycache__/menus.cpython-311.pyc
+auptitcafe/__pycache__/__init__.cpython-311.pyc
