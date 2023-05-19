@@ -10,11 +10,12 @@
 
 # 🔖 Resources
 
-- http://auptitcafe.nc/
-- [Au P'tit Cafe on TripAdvisor](https://www.tripadvisor.com/Restaurant_Review-g294130-d1952994-Reviews-Au_P_tit_Cafe-Noumea_Grand_Terre.html)
-- [`auptitcafe`](https://pypi.org/project/auptitcafe/) on `pypi`
-- [`auptitcafe`](https://www.instagram.com/auptitcafe.nc/?hl=en) sur Instagram
-- [`auptitcafe`](https://www.facebook.com/auptitcafe.nc/) sur Facebook
+- [Official website](http://auptitcafe.nc/)
+- [TripAdvisor](https://www.tripadvisor.com/Restaurant_Review-g294130-d1952994-Reviews-Au_P_tit_Cafe-Noumea_Grand_Terre.html)
+- [`pypi`](https://pypi.org/project/auptitcafe/)
+- [Instagram](https://www.instagram.com/auptitcafe.nc/?hl=en) 
+- [Facebook](https://www.facebook.com/auptitcafe.nc/)
+- [Google Maps](https://goo.gl/maps/4UcxegSnxMsE8qKs8)
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/iRSInif_Zwc/0.jpg)](https://www.youtube.com/watch?v=iRSInif_Zwc)
 
