@@ -4,6 +4,10 @@
 ![PyPI - Format](https://img.shields.io/pypi/format/auptitcafe)
 ![PyPI](https://img.shields.io/pypi/v/auptitcafe)
 
+# ❔ About
+
+> Finally a Python package to make **getting Au p'it café's menus a piece of (cheese) cake.😅**
+
 # 🔖 Resources
 
 - http://auptitcafe.nc/
