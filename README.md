@@ -9,6 +9,11 @@
 - http://auptitcafe.nc/
 - [Au P'tit Cafe on TripAdvisor](https://www.tripadvisor.com/Restaurant_Review-g294130-d1952994-Reviews-Au_P_tit_Cafe-Noumea_Grand_Terre.html)
 - [`auptitcafe`](https://pypi.org/project/auptitcafe/) on `pypi`
+- [`auptitcafe`](https://www.instagram.com/auptitcafe.nc/?hl=en) sur Instagram
+- [`auptitcafe`](https://www.facebook.com/auptitcafe.nc/) sur Facebook
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/iRSInif_Zwc/0.jpg)](https://www.youtube.com/watch?v=iRSInif_Zwc)
+
 
 # 🚀 Quickstart
 
