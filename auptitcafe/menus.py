@@ -31,8 +31,13 @@ class Menus:
 
         for menu in menus:
             name = menu.find('h5').text.strip()
-            image = menu.find('img')['src']
-            recette = menu.find('div').text.strip()
+            # get the menu photo
+            if menu.find('img'):
+                image = menu.find('img')['src']
+            else:
+                image = ""
+            # Get the details fo the receipe
+            recette = menu.find('div', class_='contact_descriptions').text.strip()
             #print('name : <' + name + '>')
             titre_plat = name.split("-")[0].strip()
             #print('Titre plat : <' + titre_plat + '>')
