@@ -73,7 +73,7 @@ poetry run pytest
 ```
 ## Publish
 
-```
-poetry config pypi-token.pypi $PYPI_TOKEM
+```shell
+poetry config pypi-token.pypi $PYPI_TOKEN
 poetry publish
 ```
