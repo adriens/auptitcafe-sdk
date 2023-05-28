@@ -8,6 +8,13 @@
 
 > Finally a Python package to make **getting Au p'it café's menus a piece of (cheese) cake.😅**
 
+With this [package](https://pypi.org/project/auptitcafe/) you can:
+
+- ✔️ Get [menus](http://auptitcafe.nc/menu/)
+- ✔️ Get [takeways](http://auptitcafe.nc/a-emporter/)
+
+... and get them as list of objects or `csv`.
+
 # 🔖 Social networks
 
 - [Official website](http://auptitcafe.nc/)
@@ -48,27 +55,22 @@ df = pd.read_csv(menus)
 df
 ```
 
-# For devs
+# Build it
 
-## Build
-
-```
+```shell
 poetry show --tree
 ```
 
-```
+```shell
 poetry build
 poetry install
 ```
 
 ## test
 
-```
+```shell
 poetry run pytest
 ```
-
-
-
 ## Publish
 
 ```
