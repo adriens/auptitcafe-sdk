@@ -20,6 +20,7 @@ class Menus:
         caracteres_speciaux = "~!@#$%^&*()_+{}:\"<>?|\\-=[];',./"
         for caractere in caracteres_speciaux:
             out = out.replace(caractere, "")
+        out = out.strip()
         return out
 
 
