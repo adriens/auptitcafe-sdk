@@ -15,6 +15,9 @@ With this [package](https://pypi.org/project/auptitcafe/) you can:
 
 ... and get them as list of objects or `csv`.
 
+👉 See it live on [Kaggle](https://www.kaggle.com/adriensales/au-p-tit-caf-pypi-package-intro) 👈
+
+
 # 🔖 Social networks
 
 - [Official website](http://auptitcafe.nc/)
