@@ -51,12 +51,13 @@ class Emporter:
             plat = Plat(title = name,
                         cat = category,
                         details = recette,
-                        img_url = image)
+                        img_url = image,
+                        price=None)
             out.append(plat)
         return out
     
     def to_csv(self, csv_filename='menus-emporter.csv', header=True):
-        menu_instance = Menus()
+        menu_instance = Emporter()
         plats = []
         plats = menu_instance.get_all()
         # Menus
