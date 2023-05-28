@@ -36,7 +36,7 @@ For the impatients, here is a quick and ready to use code snippet:
 
 ```python
 # Install the package
-!pip install auptitcafe
+!pip install auptitcafe --upgrade
 
 # Make some imports
 from auptitcafe.menus import Menus
