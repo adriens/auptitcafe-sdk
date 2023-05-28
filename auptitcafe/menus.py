@@ -1,15 +1,11 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
-
 from auptitcafe.plat import Plat
-
 
 class Menus:
     def __init__(self):
         self.menus_url = "http://auptitcafe.nc/menu/"
-
 
     def get_title(self):
         response = requests.get(self.menus_url )
@@ -22,7 +18,6 @@ class Menus:
             out = out.replace(caractere, "")
         out = out.strip()
         return out
-
 
     def get_all(self):
         out = []
@@ -140,4 +135,3 @@ class Emporter:
                 file.write('titre_plat,category,recette,image_url\n')
             for plat in plats:
                 file.write('"' + plat.title + '","' + plat.cat + '","' + plat.details + '","' + plat.img_url +  '"\n')
-    
