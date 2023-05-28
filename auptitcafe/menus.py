@@ -40,6 +40,8 @@ class Menus:
             recette = menu.find('div', class_='contact_descriptions').text.strip()
             #print('name : <' + name + '>')
             titre_plat = name.split("-")[0].strip()
+            titre_plat = re.sub(r'\s+\d+\s*F$', '', titre_plat)
+            
             #print('Titre plat : <' + titre_plat + '>')
             #print('url image : <' + image + '>')
             #print('recette : <' + recette + '>')
