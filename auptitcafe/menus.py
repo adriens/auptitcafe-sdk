@@ -16,6 +16,10 @@ class Menus:
         soup = BeautifulSoup(response.text, 'html.parser')
         title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
         out = title.text.strip()
+        # remove special characters
+        caracteres_speciaux = "~!@#$%^&*()_+{}:\"<>?|\\-=[];',./"
+        for caractere in caracteres_speciaux:
+            out = out.replace(caractere, "")
         return out
 
 
