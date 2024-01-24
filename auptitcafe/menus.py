@@ -7,6 +7,20 @@ class Menus:
     def __init__(self):
         self.menus_url = "http://auptitcafe.nc/menu/"
 
+    @staticmethod
+    def extract_price(input_string):
+        # keep only the string after "-" : "Plat côté Terre - 3300 F" should become "3300 F"
+        string_prix = titre_plat = input_string.split("-")[1].strip()
+        # remove "Frs"
+        string_prix = string_prix.replace("Frs", "")
+        string_prix = string_prix.replace("F", "")
+        string_prix = string_prix.strip()
+        # remove spaces from inside the price string
+        string_prix = "".join(string_prix.split())
+
+        prix = int(string_prix)
+        return prix
+
     def get_title(self):
         response = requests.get(self.menus_url )
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -49,7 +63,8 @@ class Menus:
             #print(name + " : " + image_url)
             numbers = [int(s) for s in re.findall(r'\d+\.\d+|\d+', name)]
             #print('Prix : <' + str(numbers[0]) + '>')
-            prix = numbers[0]
+            prix = Menus.extract_price(name)
+
             if prix < 1500:
                 category = 'DESSERT'
             else:
