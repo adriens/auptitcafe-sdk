@@ -8,18 +8,42 @@ class Menus:
         self.menus_url = "http://auptitcafe.nc/menu/"
 
     @staticmethod
-    def extract_price(input_string):
-        # keep only the string after "-" : "Plat côté Terre - 3300 F" should become "3300 F"
-        string_prix = titre_plat = input_string.split("-")[1].strip()
-        # remove "Frs"
-        string_prix = string_prix.replace("Frs", "")
-        string_prix = string_prix.replace("F", "")
-        string_prix = string_prix.strip()
-        # remove spaces from inside the price string
-        string_prix = "".join(string_prix.split())
+    def extract_price(menu_item):
+        # find the index of the first digit integer in menu_item
+        index = 0
+        for i in range(len(menu_item)):
+            if menu_item[i].isdigit():
+                index = i
+                break
+        # split the menu_item string at index and get the second part
+        name = menu_item[:index-1].strip()
+        price = menu_item[index:].strip()
+        # remove the 'Frs' character from the price
+        price = price.replace('Frs', '')
+        # remote the 'F' character from the price
+        price = price.replace('F', '')
+        
+        # remove all the white spaces from the price
+        price = int(price.replace(' ', ''))
+        return price
+    
+    @staticmethod
+    def extract_name(menu_item):
+        # find the index of the first digit integer in menu_item
+        index = 0
+        for i in range(len(menu_item)):
+            if menu_item[i].isdigit():
+                index = i
+                break
+        # split the menu_item string at index and get the second part
+        name = menu_item[:index-1].strip()
+        # remove trailing spaces from name
+        name = name.rstrip()
+        # remove ' -' from name
+        name = name.replace(' -', '')
+        return name
 
-        prix = int(string_prix)
-        return prix
+
 
     def get_title(self):
         response = requests.get(self.menus_url )
@@ -53,16 +77,18 @@ class Menus:
             # Get the details fo the receipe
             recette = menu.find('div', class_='contact_descriptions').text.strip()
             #print('name : <' + name + '>')
-            titre_plat = name.split("-")[0].strip()
-            titre_plat = re.sub(r'\s+\d+\s*F$', '', titre_plat)
-            
+            #titre_plat = name.split("-")[0].strip()
+            #titre_plat = re.sub(r'\s+\d+\s*F$', '', titre_plat)
+            titre_plat = Menus.extract_name(name)
+
             #print('Titre plat : <' + titre_plat + '>')
             #print('url image : <' + image + '>')
             #print('recette : <' + recette + '>')
             #image_url = menu.find('img')['src']
             #print(name + " : " + image_url)
-            numbers = [int(s) for s in re.findall(r'\d+\.\d+|\d+', name)]
+            #numbers = [int(s) for s in re.findall(r'\d+\.\d+|\d+', name)]
             #print('Prix : <' + str(numbers[0]) + '>')
+            #prix = Menus.extract_price(name)
             prix = Menus.extract_price(name)
 
             if prix < 1500:
