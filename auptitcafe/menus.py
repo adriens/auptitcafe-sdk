@@ -8,7 +8,7 @@ class Menus:
         self.menus_url = "http://auptitcafe.nc/menu/"
 
     @staticmethod
-    def extract_price(input_string):
+    def extract_price(menu_item):
         # find the index of the first digit integer in menu_item
         index = 0
         for i in range(len(menu_item)):
