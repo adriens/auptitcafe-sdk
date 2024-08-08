@@ -41,6 +41,7 @@ class Menus:
         name = name.rstrip()
         # remove ' -' from name
         name = name.replace(' -', '')
+        name = name.replace('"', "'")
         return name
 
 
