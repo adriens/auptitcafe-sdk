@@ -28,7 +28,7 @@ With this [package](https://pypi.org/project/auptitcafe/) you can:
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/iRSInif_Zwc/0.jpg)](https://www.youtube.com/watch?v=iRSInif_Zwc)
 
-# 🤓 Nerd resources
+# 😎 Developer Resources
 
 - [🐍 `pypi`](https://pypi.org/project/auptitcafe/)
 - [😋 Au p'tit café (pypi package intro on Kaggle) 🚀](https://www.kaggle.com/adriensales/au-p-tit-caf-pypi-package-intro)
@@ -58,7 +58,9 @@ df = pd.read_csv(menus)
 df
 ```
 
-# Build it
+# 🏗️ Build it
+
+See poetry [installation](https://python-poetry.org/docs/#installation)
 
 ```shell
 poetry show --tree
@@ -69,7 +71,7 @@ poetry build
 poetry install
 ```
 
-## test
+## Test
 
 ```shell
 poetry run pytest
