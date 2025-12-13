@@ -6,48 +6,52 @@ from auptitcafe.plat import Plat
 class Menus:
     def __init__(self):
         self.menus_url = "http://auptitcafe.nc/menu/"
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
 
     @staticmethod
     def extract_price(menu_item):
-        # find the index of the first digit integer in menu_item
-        index = 0
-        for i in range(len(menu_item)):
-            if menu_item[i].isdigit():
-                index = i
-                break
-        # split the menu_item string at index and get the second part
-        name = menu_item[:index-1].strip()
-        price = menu_item[index:].strip()
-        # remove the 'Frs' character from the price
-        price = price.replace('Frs', '')
-        # remote the 'F' character from the price
-        price = price.replace('F', '')
+        # Find the dash separator that precedes the price
+        if '-' in menu_item:
+            parts = menu_item.rsplit('-', 1)
+            if len(parts) == 2:
+                price_str = parts[1].strip()
+                # Extract digits from price string
+                price_digits = ''.join(c for c in price_str if c.isdigit())
+                if price_digits:
+                    return int(price_digits)
         
-        # remove all the white spaces from the price
-        price = int(price.replace(' ', ''))
-        return price
+        # Fallback: find the last occurrence of digits followed by F or Frs
+        import re
+        match = re.search(r'(\d+(?:\s+\d+)*)\s*F(?:rs)?', menu_item)
+        if match:
+            price_str = match.group(1).replace(' ', '')
+            return int(price_str)
+        
+        return 0
     
     @staticmethod
     def extract_name(menu_item):
-        # find the index of the first digit integer in menu_item
-        index = 0
-        for i in range(len(menu_item)):
-            if menu_item[i].isdigit():
-                index = i
-                break
-        # split the menu_item string at index and get the second part
-        name = menu_item[:index-1].strip()
-        # remove trailing spaces from name
-        name = name.rstrip()
-        # remove ' -' from name
-        name = name.replace(' -', '')
+        # Find the dash separator that precedes the price
+        if '-' in menu_item:
+            parts = menu_item.rsplit('-', 1)
+            if len(parts) == 2:
+                name = parts[0].strip()
+                name = name.replace('"', "'")
+                return name
+        
+        # Fallback: remove price pattern from end
+        import re
+        name = re.sub(r'\s*-?\s*\d+(?:\s+\d+)*\s*F(?:rs)?$', '', menu_item)
+        name = name.strip()
         name = name.replace('"', "'")
         return name
 
 
 
     def get_title(self):
-        response = requests.get(self.menus_url )
+        response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
         out = title.text.strip()
@@ -60,7 +64,7 @@ class Menus:
 
     def get_all(self):
         out = []
-        response = requests.get(self.menus_url )
+        response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
         #print('title : <' + title.text.strip() + '>')
@@ -120,10 +124,12 @@ class Menus:
 class Emporter:
     def __init__(self):
         self.menus_url = "http://auptitcafe.nc/a-emporter/"
-
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
 
     def get_title(self):
-        response = requests.get(self.menus_url )
+        response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
         out = title.text.strip()
@@ -137,7 +143,7 @@ class Emporter:
 
     def get_all(self):
         out = []
-        response = requests.get(self.menus_url )
+        response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         # Plats
 

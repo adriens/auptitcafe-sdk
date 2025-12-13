@@ -7,10 +7,12 @@ from auptitcafe.plat import Plat
 class Emporter:
     def __init__(self):
         self.menus_url = "http://auptitcafe.nc/a-emporter/"
-
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
 
     def get_title(self):
-        response = requests.get(self.menus_url )
+        response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
         out = title.text.strip()
@@ -24,7 +26,7 @@ class Emporter:
 
     def get_all(self):
         out = []
-        response = requests.get(self.menus_url )
+        response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         # Plats
 
