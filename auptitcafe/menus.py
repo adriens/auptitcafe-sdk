@@ -53,8 +53,9 @@ class Menus:
     def get_title(self):
         response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
-        out = title.text.strip()
+        section = soup.find('section', id='carte')
+        title = section.find('h2') if section else None
+        out = title.text.strip() if title else ""
         # remove special characters
         caracteres_speciaux = "~!@#$%^&*()_+{}:\"<>?|\\-=[];,./"
         for caractere in caracteres_speciaux:
@@ -66,47 +67,35 @@ class Menus:
         out = []
         response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
-        #print('title : <' + title.text.strip() + '>')
-        # Plats
+        # Plats "sur place"
 
-        menus = soup.find_all('div', class_='col-sm-6 col-md-6 mb-4 selfer-contact-info')
+        panel = soup.find('div', id='apc-sp')
+        dishes = panel.find_all('article', class_='dish') if panel else []
 
-        for menu in menus:
-            name = menu.find('h5').text.strip()
+        for dish in dishes:
+            name = dish.find('span', class_='dish-name').text.strip()
+            name = name.replace('"', "'")
+
             # get the menu photo
-            if menu.find('img'):
-                image = menu.find('img')['src']
-            else:
-                image = ""
-            # Get the details fo the receipe
-            recette = menu.find('div', class_='contact_descriptions').text.strip()
-            #print('name : <' + name + '>')
-            #titre_plat = name.split("-")[0].strip()
-            #titre_plat = re.sub(r'\s+\d+\s*F$', '', titre_plat)
-            titre_plat = Menus.extract_name(name)
+            img = dish.find('img', class_='dish-img')
+            image = img['src'] if img else ""
 
-            #print('Titre plat : <' + titre_plat + '>')
-            #print('url image : <' + image + '>')
-            #print('recette : <' + recette + '>')
-            #image_url = menu.find('img')['src']
-            #print(name + " : " + image_url)
-            #numbers = [int(s) for s in re.findall(r'\d+\.\d+|\d+', name)]
-            #print('Prix : <' + str(numbers[0]) + '>')
-            #prix = Menus.extract_price(name)
-            prix = Menus.extract_price(name)
+            # Get the details fo the receipe
+            desc = dish.find('p', class_='dish-desc')
+            recette = desc.text.strip() if desc else ""
+
+            price_el = dish.find('span', class_='dish-price-amount')
+            prix = Menus.extract_price(price_el.text.strip()) if price_el else 0
 
             if prix < 1500:
                 category = 'DESSERT'
             else:
                 category = 'PLAT'
-            #print("Catgory : <" + category + '>')
-            plat = Plat(title = titre_plat,
+            plat = Plat(title = name,
                         price = prix,
                         cat = category,
                         details = recette,
                         img_url = image)
-            #print("================================================================")
             out.append(plat)
         return out
     
@@ -131,8 +120,9 @@ class Emporter:
     def get_title(self):
         response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
-        out = title.text.strip()
+        section = soup.find('section', id='carte')
+        title = section.find('h2') if section else None
+        out = title.text.strip() if title else ""
         # remove special characters
         caracteres_speciaux = "~!@#$%^&*()_+{}:\"<>?|\\-=[];,./"
         for caractere in caracteres_speciaux:
@@ -145,31 +135,32 @@ class Emporter:
         out = []
         response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        # Plats
+        # Plats "à emporter"
 
-        menus = soup.find_all('div', class_='col-sm-6 col-md-6 mb-4 selfer-contact-info')
+        panel = soup.find('div', id='apc-ae')
+        dishes = panel.find_all('article', class_='dish') if panel else []
 
-        for menu in menus:
-            # name
-            name = menu.find('h5').text.strip()
-            
+        for dish in dishes:
+            name = dish.find('span', class_='dish-name').text.strip()
+            name = name.replace('"', "'")
+
             # get the menu photo
-            if menu.find('img'):
-                image = menu.find('img')['src']
-            else:
-                image = ""
+            img = dish.find('img', class_='dish-img')
+            image = img['src'] if img else ""
+
             # Get the details fo the receipe
-            recette = menu.find('div', class_='contact_descriptions').text.strip()
-            #print('name : <' + name + '>')
-            titre_plat = ""
-            
+            desc = dish.find('p', class_='dish-desc')
+            recette = desc.text.strip() if desc else ""
+
+            price_el = dish.find('span', class_='dish-price-amount')
+            prix = Menus.extract_price(price_el.text.strip()) if price_el else 0
+
             category = 'EMPORTER'
-            #print("Catgory : <" + category + '>')
             plat = Plat(title = name,
                         cat = category,
                         details = recette,
                         img_url = image,
-                        price = 0)
+                        price = prix)
             out.append(plat)
         return out
     

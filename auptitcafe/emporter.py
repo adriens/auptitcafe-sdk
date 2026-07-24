@@ -4,6 +4,13 @@ from bs4 import BeautifulSoup
 from auptitcafe.plat import Plat
 
 
+def extract_price(price_text):
+    match = re.search(r'(\d+(?:\s+\d+)*)\s*F(?:rs)?', price_text)
+    if match:
+        return int(match.group(1).replace(' ', ''))
+    return 0
+
+
 class Emporter:
     def __init__(self):
         self.menus_url = "http://auptitcafe.nc/a-emporter/"
@@ -14,8 +21,9 @@ class Emporter:
     def get_title(self):
         response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        title = soup.find('h2', class_='elementor-heading-title elementor-size-default')
-        out = title.text.strip()
+        section = soup.find('section', id='carte')
+        title = section.find('h2') if section else None
+        out = title.text.strip() if title else ""
         # remove special characters
         caracteres_speciaux = "~!@#$%^&*()_+{}:\"<>?|\\-=[];,./"
         for caractere in caracteres_speciaux:
@@ -28,31 +36,33 @@ class Emporter:
         out = []
         response = requests.get(self.menus_url, headers=self.headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        # Plats
+        # Plats "à emporter"
 
-        menus = soup.find_all('div', class_='col-sm-6 col-md-6 mb-4 selfer-contact-info')
+        panel = soup.find('div', id='apc-ae')
+        dishes = panel.find_all('article', class_='dish') if panel else []
 
-        for menu in menus:
+        for dish in dishes:
             # name
-            name = menu.find('h5').text.strip()
-            
+            name = dish.find('span', class_='dish-name').text.strip()
+            name = name.replace('"', "'")
+
             # get the menu photo
-            if menu.find('img'):
-                image = menu.find('img')['src']
-            else:
-                image = ""
+            img = dish.find('img', class_='dish-img')
+            image = img['src'] if img else ""
+
             # Get the details fo the receipe
-            recette = menu.find('div', class_='contact_descriptions').text.strip()
-            #print('name : <' + name + '>')
-            titre_plat = ""
-            
+            desc = dish.find('p', class_='dish-desc')
+            recette = desc.text.strip() if desc else ""
+
+            price_el = dish.find('span', class_='dish-price-amount')
+            prix = extract_price(price_el.text.strip()) if price_el else 0
+
             category = 'EMPORTER'
-            #print("Catgory : <" + category + '>')
             plat = Plat(title = name,
                         cat = category,
                         details = recette,
                         img_url = image,
-                        price=None)
+                        price = prix)
             out.append(plat)
         return out
     
